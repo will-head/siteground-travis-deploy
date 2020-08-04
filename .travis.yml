@@ -9,4 +9,5 @@ env:
   - secure: btyO4R8m06BU9zZfqMvgoo/0qVzkIh1K8z7qLnoZJ+Dmg+Ui0FH/LkSVHQFyH/0Z5yrgKX6IFusGxtFKJ6zx45lmFGKQLI8VegrDyMmtguVwVsa+sfKgDGJw5wBEMdvaSAwYJcvfqDj6soZhcQuIF1RR1pJiOVasvyUThO1emTtylMz5PJ+ldJ0TZIwkcE2Zxkkl6neQ+vmLyfPP0p8fzAxDCtvV8J071HCOQ6xPW1cDNnsVAt2+om0CR2qYOhab4sDtG1Vh18UUlyC+/wGkUKvjO91H4W1i2PMerb1mDvbx1K0VJ+p17FKI8FZSwdwT6NOK+o362fcDKsVlr4KJ/DcbftJNVsjbvj2IG4NNE38IoM7XKS0XXyH21z3SmZvi//ACaWRLtiQj4cRz+HEXkf32/U40QRnVATVP1nAVyOnn5IAkm6RUCTQT6gyxC8z+38IOjqZvZ+h7H7u1EY/+Yy9T5xKKXjqMFIDAJkkmAry2SaFKVnh1IZ8hIgasf1h3wClMOcYQlJEyvSufUf7ndTMpUrG776FSvimknmCHs8GZg1sPstLYklfVCEEx/Qh1UI7uTM7HIDEHOdnn4WFUFYUegyViiAlPU7auUQUd3FsiOUwPQeqz0DXI03nmqOgMgZ4Ixxv07ZerwH4BvbTM1qBiLIxQe8g3X7I6NcHYQcs=
 install:
   - echo 'SG_KEY' >> $HOME/.ssh/known_hosts
+  - less $HOME/.ssh/known_hosts
 script: "./deploy.sh"
