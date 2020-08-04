@@ -1,9 +1,16 @@
 language: node_js
+
 node_js:
   - "stable"
+
 cache:
   directories:
   # - node_modules
+
+env:
+  global:
+    - SSH_USER=user@domain
+
 script:
   ./deploy.sh
   # - npm test
