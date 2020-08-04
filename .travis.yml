@@ -17,8 +17,13 @@ before_deploy:
   - ssh-add /tmp/siteground_rsa
   - rm /tmp/siteground_rsa
 deploy:
-  provider: script
-  skip_cleanup: true
-  script: bash deploy.sh production
-  on:
-    branch: main
+  - provider: script
+    skip_cleanup: true
+    script: bash deploy.sh staging
+    on:
+      branch: staging
+  - provider: script
+    skip_cleanup: true
+    script: bash deploy.sh production
+    on:
+      branch: main
