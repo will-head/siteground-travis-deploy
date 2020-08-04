@@ -20,6 +20,10 @@ before_deploy:
   - eval "$(ssh-agent -s)"
   - chmod 600 /tmp/siteground_rsa
   - ssh-add /tmp/siteground_rsa
-deploy: "./deploy.sh"
+deploy:
+  provider: script
+  script: deploy.sh
+  on:
+    branch: main
 after_script:
   - rm /tmp/siteground_rsa
