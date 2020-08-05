@@ -1,8 +1,8 @@
-# How to deploy from GitHub to Siteground using Travis
+# How to deploy from GitHub to SiteGround using Travis
 
-You can use [Travis CI](https://travis-ci.com/) to deploy to Siteground - or most Cpanel webhosts that let you use SSH.
+You can use [Travis CI](https://travis-ci.com/) to deploy to [SiteGround](https://www.siteground.com/) - or most Cpanel webhosts that let you use SSH.
 
-## Add SSH key to Siteground
+## Add SSH key to SiteGround
 
 The first stage is to generate an key pair to allow you to connect to your account via SSH.
 
@@ -33,3 +33,20 @@ Leave `Allowed IP address` blank if you want to allow access from any IP address
 Travis lists its [IP Addresses](https://docs.travis-ci.com/user/ip-addresses/), which you can add manually to make it more secure.
 
 ## Add Travis config
+
+The deploy.sh script expects four variables:
+
+`SG_PORT` - the port SiteGround uses for SSH  
+`SG_USER` - the username used to login to SiteGround  
+`SG_DOMAIN` - the domain for the SiteGround account  
+`SG_KEY` - the public key for the SiteGround domain  
+
+`SG_PORT` isn't sensitive, so can be declared as a normal global environment variable in `.travis.yml`.
+
+The remaining three are sensitive so are best encrytped rather than left in plain text.
+
+## To do
+
+- Add encrypting Travis secrets  
+- Add encrypting private SiteGround key  
+- Add staging branch  
