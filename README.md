@@ -4,7 +4,7 @@ You can use [Travis CI](https://travis-ci.com/) to deploy to [SiteGround](https:
 
 ## Add SSH key to SiteGround
 
-The first stage is to generate an key pair to allow you to connect to your account via SSH.
+The first stage is to generate a key pair to allow you to connect to your account via SSH.
 
 ```bash
 ssh-keygen -t rsa -b 4096 -C 'build@travis-ci.org' -f ~/.ssh/siteground_rsa
