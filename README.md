@@ -1,4 +1,4 @@
-# How to deploy from GitHub to SiteGround using Travis
+# How to deploy from GitHub to SiteGround using Travis, Rsync and SSH
 
 You can use [Travis CI](https://travis-ci.com/) to deploy to [SiteGround](https://www.siteground.com/) - or most Cpanel webhosts that let you use SSH.
 
@@ -7,6 +7,10 @@ The setup of your own SiteGround account (or other Cpanel host) may be slightly 
 The script assumes you want to deploy everything in the `./build` directory to the root of site.
 
 There's also a dummy `tests.sh` script included, otherwise Travis won't deploy if the tests don't complete. This script can be removed once you implement your own testing.
+
+## Notes on Create React App
+
+If you're using [Create React App](https://create-react-app.dev/), make sure you remove `/build` from the `.gitignore` it creates so that directory is available for Travis to deploy.
 
 ## Add SSH key to SiteGround
 
@@ -95,7 +99,7 @@ travis encrypt --pro SG_KEY=key
 
 ```bash
 cd deploy
-travis encrypt-file ~/.ssh/siteground_rsa
+travis encrypt-file --pro ~/.ssh/siteground_rsa
 ```
 
 This will output something similar to:
