@@ -9,9 +9,9 @@ env:
   - secure: "yvRtngnUqsWtktItAY7cUTSExZKcusWC58MsmCGUuLJOCWfdQJ6+Hsf54tMsNGrBKMxwRr2mWs4jKSx5Edpvoujg0aRj5ZQCT+YZ0gNsp01yHVccf2XppzZxqeCHHDePBaV2zoqI1oz7O1Zi0fOKiyuAYBajMs5/DV3u6Qqnvc1iqpmtjSYJCj7ldC8RErp1PIFXwt6SyRIMhpq9tMYGOEwwo4P679Bx8ghnorkmrD3ae6lyT+gzgJRV0VqJ5btXPPe2nk87ry+PtdpEtJYaxz68Y9UJwQ1NwfOF46OtM8UNOd4E5XsDwqp18GwFGnIHdNdyRpo8BEzxA4wKjdm4EcSk86pc0rxjUNUZV+7CLrMTnEQ6X5sLDQ2gg9IOnPvyW+f1qrpusOWQB2T3TAQwMJPnZ9+hROr3I6a//JfdHxhT9fEY9iG+nVukVhs8vzXFW9uXRPi8RtchBpp+RU6pBlplAAwnTKrvcyoYhje5ErM89wEpS7tcHLQTKoznR6tq8YEOyLjTgEHvrjJ/SBeZMkCmVEMah6uR3OgRc4eOcKMXiPAhPJzsSDuB2f2DQVKemOhNMegJ4wwJWncK6S21aZk/hPFdQEMArhenjeV18QPmzwy+wkL/WOskWDMqNUFJ6jNUVuWfuiVIj1Qo8JBs3aCc5H/jaMMTO/dX/FFkjXc="
   - secure: "smNOplCyYkw5ePV0oXZgsP1TYRWfGIpDzUiXDc6Ps5r+LVfLdrYJq36IK8KsmEicu+guamP/v5JS0upJ/6/yfRxhyJGT4oRAaldiHiEp2WdC2ikbZdOhNzBintUnsadRBa1lLX9jKuCyebJ12H0Nh7Hyv0DOTKEymUVceuuKzpwxVH/v/z830Qr1Opl/PM8SaIX2nHh7/1HapBIybPIAyhRgh40cYK2i1WLx3Ur5z1oiUsUICnaTjOYdD9PVJJsvJlAr19FwwTF4ORXySKi7Ajmbr3Kn1bYyez11l5i96Kyut/S9fdon8it9uKISX/SE5Z1I/+oGgJdLb2u3ieTjD323RsKQd3ExlUKr4A7tfGU5czpvDGAwd2OEQ4BEy54znoVdOJ/1RejXobpzeaMEHdh+aFe2HoaRPOv88luEYhUUlNCoo5OorF2vL6sGFXMTMMXTYSa3f1w/JaTfOkl766ItgA6hEKit4KGGcAw0ZWnsMMS/XFJ+EZWVQcKrJW4LEI6kM9EqtuZUSA5B8ZBrFR7yXd3dgGubnsErPpTPszB48omaIABsAQFzgMWpCiDvv4cAnUYXKtIDUuFIwJ+pO95LMoxrTv8IhSXiSQZRaToN9O4wVXLv5sfaEX8yQVUpK6zWM5s9gzogUcKOphJFBv79jAamghF54mB2BQfgI64="
   - secure: "rCaP7ADKqSoKJk4drCdfiKishEoiZGOW8oyLP8obGw/zHSn/9o8hyXOpRc+0GfJpUxTi1wZLF+Xj5L2WB/AhKE+ppq77ZCqub3f/aRLUrE7P82TTsx06WzilWiutKhdc0drse5qa5abe5Tcw+DV16Nga2pyk57mJ8mWmytO+LEkEHq5Liio03VC/w8Wfa/D7daftNjSiT+5bcMY3BY9Jozbp79AYqsgcqajiQKFdIQ8tvWkWNnYY2EmKDm9g8btA+GXufcICOn6jP5SECG2QKbTTHOyqHZwhpgMBFCopRZA3bv7ZBjNoocPz62zYiCWGeMXqilLxkzYpm3KjuhehqF4X/Ig54MOlcdgNJfRtP7p0GjjcCU8Sb/6MiN1vura72d5WVFyn4mpLMm8DerUQAtFuZl895lDNU4IVaSFKdPrxtcvVeKdOY01cfBXdlFPFqK1jWm/mWga9oWT51C1p4CON2jbXJfJv5WGOzs3aPj0OnKZfVgy22mUQkhVvASY6OjoHyTqacsD9gUCLLmWWeh5cGpFF0BIk6o0IOhkTECuFphHsO4Eo1md/cmo3quol8UCl+sfXvPn9xzEHaKDC8lr5RhC3hBqFCVVuHOvj8N9G5C4OClSy9PEcqmxa5kYaKKiUxEO1FQRRqgb1b8ZdSW38ZO4+i7+b8pKuEm7od4k="
-script: "./scripts/tests.sh"
+script: "./deploy/tests.sh"
 before_deploy:
-  - openssl aes-256-cbc -K $encrypted_de75dd5ac6fc_key -iv $encrypted_de75dd5ac6fc_iv -in siteground_rsa.enc -out /tmp/siteground_rsa -d
+  - openssl aes-256-cbc -K $encrypted_de75dd5ac6fc_key -iv $encrypted_de75dd5ac6fc_iv -in deploy/siteground_rsa.enc -out /tmp/siteground_rsa -d
   - eval "$(ssh-agent -s)"
   - chmod 600 /tmp/siteground_rsa
   - ssh-add /tmp/siteground_rsa
@@ -19,11 +19,11 @@ before_deploy:
 deploy:
   - provider: script
     skip_cleanup: true
-    script: bash ./scripts/deploy.sh staging
+    script: bash ./deploy/deploy.sh staging
     on:
       branch: staging
   - provider: script
     skip_cleanup: true
-    script: bash ./scripts/deploy.sh production
+    script: bash ./deploy/deploy.sh production
     on:
       branch: main
