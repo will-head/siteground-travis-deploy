@@ -1,9 +1,9 @@
 #!/bin/sh
 
 if [[ "$1" = "production" ]] ; then
-  DEPLOY_DIR="ppoc.dev"
+  DEPLOY_DIR="test-domain"
 else
-  DEPLOY_DIR="staging.ppoc.dev"
+  DEPLOY_DIR="staging.test-domain"
 fi
 
 echo "Deploying files to server"
