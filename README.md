@@ -100,7 +100,7 @@ openssl aes-256-cbc -K $encrypted_XXX_key -iv $encrypted_XXX_iv -in siteground_r
 Change this line to:
 
 ```bash
-openssl aes-256-cbc -K $encrypted_XXX_key -iv $encrypted_XXX_iv -in deploy/siteground_rsa.enc -out /tmp/siteground_rsa -d
+openssl aes-256-cbc -K $encrypted_XXX_key -iv $encrypted_XXX_iv -in ./deploy/siteground_rsa.enc -out /tmp/siteground_rsa -d
 ```
 
 And add it to the `before_deploy` section of your `.travis.yml`.

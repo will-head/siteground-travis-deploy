@@ -11,7 +11,7 @@ env:
   - secure: "rCaP7ADKqSoKJk4drCdfiKishEoiZGOW8oyLP8obGw/zHSn/9o8hyXOpRc+0GfJpUxTi1wZLF+Xj5L2WB/AhKE+ppq77ZCqub3f/aRLUrE7P82TTsx06WzilWiutKhdc0drse5qa5abe5Tcw+DV16Nga2pyk57mJ8mWmytO+LEkEHq5Liio03VC/w8Wfa/D7daftNjSiT+5bcMY3BY9Jozbp79AYqsgcqajiQKFdIQ8tvWkWNnYY2EmKDm9g8btA+GXufcICOn6jP5SECG2QKbTTHOyqHZwhpgMBFCopRZA3bv7ZBjNoocPz62zYiCWGeMXqilLxkzYpm3KjuhehqF4X/Ig54MOlcdgNJfRtP7p0GjjcCU8Sb/6MiN1vura72d5WVFyn4mpLMm8DerUQAtFuZl895lDNU4IVaSFKdPrxtcvVeKdOY01cfBXdlFPFqK1jWm/mWga9oWT51C1p4CON2jbXJfJv5WGOzs3aPj0OnKZfVgy22mUQkhVvASY6OjoHyTqacsD9gUCLLmWWeh5cGpFF0BIk6o0IOhkTECuFphHsO4Eo1md/cmo3quol8UCl+sfXvPn9xzEHaKDC8lr5RhC3hBqFCVVuHOvj8N9G5C4OClSy9PEcqmxa5kYaKKiUxEO1FQRRqgb1b8ZdSW38ZO4+i7+b8pKuEm7od4k="
 script: "./deploy/tests.sh"
 before_deploy:
-  - openssl aes-256-cbc -K $encrypted_de75dd5ac6fc_key -iv $encrypted_de75dd5ac6fc_iv -in deploy/siteground_rsa.enc -out /tmp/siteground_rsa -d
+  - openssl aes-256-cbc -K $encrypted_de75dd5ac6fc_key -iv $encrypted_de75dd5ac6fc_iv -in ./deploy/siteground_rsa.enc -out /tmp/siteground_rsa -d
   - eval "$(ssh-agent -s)"
   - chmod 600 /tmp/siteground_rsa
   - ssh-add /tmp/siteground_rsa
