@@ -2,6 +2,12 @@
 
 You can use [Travis CI](https://travis-ci.com/) to deploy to [SiteGround](https://www.siteground.com/) - or most Cpanel webhosts that let you use SSH.
 
+The setup of your own SiteGround account (or other Cpanel host) may be slightly different, but this should plug the main gaps.
+
+The script assumes you want to deploy everything in the `./build` directory to the root of site.
+
+There's also a dummy `tests.sh` script included, otherwise Travis won't deploy if the tests don't complete. This script can be removed once you implement your own testing.
+
 ## Add SSH key to SiteGround
 
 The first stage is to generate a key pair to allow you to connect to your account via SSH.
@@ -88,6 +94,7 @@ travis encrypt --pro SG_KEY=key
 *Before* you add the SiteGround private key to your repository you must encrypt it, otherwise anyone could download it and use it to login to your account.
 
 ```bash
+cd deploy
 travis encrypt-file ~/.ssh/siteground_rsa
 ```
 
@@ -157,9 +164,9 @@ env:
   - secure: "[long_string]"
   - secure: "[long_string]"
   - secure: "[long_string]"
-script: "./tests.sh"
+script: "./deploy/tests.sh"
 before_deploy:
-  - openssl aes-256-cbc -K $encrypted_XXX_key -iv $encrypted_XXX_key -in siteground_rsa.enc -out /tmp/siteground_rsa -d
+  - openssl aes-256-cbc -K $encrypted_XXX_key -iv $encrypted_XXX_key -in ./deploy/siteground_rsa.enc -out /tmp/siteground_rsa -d
   - eval "$(ssh-agent -s)"
   - chmod 600 /tmp/siteground_rsa
   - ssh-add /tmp/siteground_rsa
@@ -167,12 +174,12 @@ before_deploy:
 deploy:
   - provider: script
     skip_cleanup: true
-    script: bash deploy.sh staging
+    script: bash ./deploy/.deploy.sh staging
     on:
       branch: staging
   - provider: script
     skip_cleanup: true
-    script: bash deploy.sh production
+    script: bash ./deploy/.deploy.sh production
     on:
       branch: main
 ```
